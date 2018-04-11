@@ -170,6 +170,7 @@ export function resizeEmbeds(parent = document) {
             return;
         }
 
+        // 'spacechange' is fired only on embeds with cards
         if (!event.data || event.data.event !== 'spacechange') {
             return;
         }
