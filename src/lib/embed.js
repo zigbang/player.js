@@ -181,11 +181,10 @@ export function resizeEmbeds(parent = document) {
                 continue;
             }
 
+            // Change padding-bottom of the enclosing div to accommodate
+            // card carousel without distorting aspect ratio
             const space = iframes[i].parentElement;
-
-            if (space && space.className.indexOf('vimeo-space') !== -1) {
-                space.style.paddingBottom = `${event.data.data[0].bottom}px`;
-            }
+            space.style.paddingBottom = `${event.data.data[0].bottom}px`;
 
             break;
         }
