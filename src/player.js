@@ -206,13 +206,20 @@ class Player {
      * callback with a single parameter, `data`, that contains the data for
      * that event.
      *
-     * @param {string} eventName The name of the event.
+     * @param {string|string[]} eventName The name or list of names of the event
      * @param {function(*)} callback The function to call when the event fires.
      * @return {void}
      */
     on(eventName, callback) {
         if (!eventName) {
-            throw new TypeError('You must pass an event name.');
+            throw new TypeError('You must pass an event name or array of event names.');
+        }
+
+        // Add an event listener for multiple events passed as an array
+        if (eventName instanceof Array && eventName.length > 0) {
+            eventName.forEach((event) => {
+                this.on(event, callback);
+            })
         }
 
         if (!callback) {
@@ -239,13 +246,23 @@ class Player {
      * listeners for that event if a `callback` isn’t passed, or only that
      * specific callback if it is passed.
      *
-     * @param {string} eventName The name of the event.
+     * @param {string|string[]} eventName The name or list of names of the event
      * @param {function} [callback] The specific callback to remove.
      * @return {void}
      */
     off(eventName, callback) {
         if (!eventName) {
             throw new TypeError('You must pass an event name.');
+        }
+
+        // Remove one callback across multiple events
+        if (eventName instanceof Array && eventName.length > 0) {
+            if (!callback) {
+                throw new TypeError('You must pass a callback to remove across multiple events');
+            }
+            eventName.forEach((event) => {
+                this.off(event, callback);
+            })
         }
 
         if (callback && typeof callback !== 'function') {

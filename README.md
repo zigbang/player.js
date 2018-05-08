@@ -344,6 +344,18 @@ var onPlay = function(data) {
 player.on('play', onPlay);
 ```
 
+You can also create a handler that listens to multiple events by passing them as an array. For example:
+
+```js
+var eventList = ['progress', 'seeked', 'bufferstart'];
+var logEvent = function(data) {
+    console.log(data);
+}
+
+// Add a handler across multiple events.
+player.on(eventList, logEvent);
+```
+
 ### off(event: string, callback?: function): void
 
 Remove an event listener for the specified event. Will remove all listeners for
@@ -363,6 +375,21 @@ player.off('play', onPlay);
 // Alternatively, `off` can be called with just the event name to remove all
 // listeners.
 player.off('play');
+```
+
+You can remove a handler across multiple events by passing them as an array. In this case, you must specify the callback to be removed.
+For example:
+
+```js
+var eventList = ['progress', 'seeked', 'bufferstart'];
+var logEvent = function(data) {
+    console.log(data);
+}
+
+player.on(eventList, logEvent);
+
+// `off` can be called with list of event names to remove one listener across many events
+player.off(eventList, logEvent);
 ```
 
 ### loadVideo(id: number): Promise&lt;number, (TypeError|PasswordError|Error)&gt;
