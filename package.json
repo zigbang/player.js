@@ -24,7 +24,7 @@
     "push-release": "git push origin master latest && git push --tags",
     "postpublish": "greenkeeper-postpublish"
   },
-  "main": "dist/player.js",
+  "main": "dist/player.cjs.js",
   "module": "dist/player.es.js",
   "jsnext:main": "dist/player.es.js",
   "directories": {
