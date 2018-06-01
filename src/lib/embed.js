@@ -52,13 +52,13 @@ export function getOEmbedParameters(element, defaults = {}) {
  * @param {Object} [params] Parameters to pass to oEmbed.
  * @return {Promise}
  */
-export function getOEmbedData(videoUrl, params = {}) {
+export function getOEmbedData(videoUrl, params = {}, element) {
     return new Promise((resolve, reject) => {
         if (!isVimeoUrl(videoUrl)) {
             throw new TypeError(`“${videoUrl}” is not a vimeo.com url.`);
         }
 
-        let url = `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(videoUrl)}`;
+        let url = `https://api-2489.ci.vimeows.com/api/oembed.json?url=${encodeURIComponent(videoUrl)}&domain=${window.location.hostname}`;
 
         for (const param in params) {
             if (params.hasOwnProperty(param)) {
@@ -81,8 +81,17 @@ export function getOEmbedData(videoUrl, params = {}) {
             }
 
             try {
-                const json = JSON.parse(xhr.responseText);
-                resolve(json);
+                const json = JSON.parse(xhr.responseText);    
+                
+                // Check api response for 403 on oembed
+                if (json['domain_status_code'] === 403) {
+
+                    // We still want to create the embed to give users visual feedback
+                    createEmbed(json, element);
+                    return reject(new Error(`“${videoUrl}” is not embeddable.`));
+                } 
+
+               resolve(json);
             }
             catch (error) {
                 reject(error);
@@ -148,7 +157,7 @@ export function initializeEmbeds(parent = document) {
             const params = getOEmbedParameters(element);
             const url = getVimeoUrl(params);
 
-            getOEmbedData(url, params).then((data) => {
+            getOEmbedData(url, params, element).then((data) => {
                 return createEmbed(data, element);
             }).catch(handleError);
         }
