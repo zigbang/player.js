@@ -46,10 +46,36 @@ export function getOEmbedParameters(element, defaults = {}) {
 }
 
 /**
+ * Create an embed from oEmbed data inside an element.
+ *
+ * @param {object} data The oEmbed data.
+ * @param {HTMLElement} element The element to put the iframe in.
+ * @return {HTMLIFrameElement} The iframe embed.
+ */
+export function createEmbed({ html }, element) {
+    if (!element) {
+        throw new TypeError('An element must be provided');
+    }
+
+    if (element.getAttribute('data-vimeo-initialized') !== null) {
+        return element.querySelector('iframe');
+    }
+
+    const div = document.createElement('div');
+    div.innerHTML = html;
+
+    element.appendChild(div.firstChild);
+    element.setAttribute('data-vimeo-initialized', 'true');
+
+    return element.querySelector('iframe');
+}
+
+/**
  * Make an oEmbed call for the specified URL.
  *
  * @param {string} videoUrl The vimeo.com url for the video.
  * @param {Object} [params] Parameters to pass to oEmbed.
+ * @param {HTMLElement} element The element.
  * @return {Promise}
  */
 export function getOEmbedData(videoUrl, params = {}, element) {
@@ -81,15 +107,16 @@ export function getOEmbedData(videoUrl, params = {}, element) {
             }
 
             try {
-                const json = JSON.parse(xhr.responseText);    
+                const json = JSON.parse(xhr.responseText);
                 // Check api response for 403 on oembed
-                if (json['domain_status_code'] === 403) {
+                if (json.domain_status_code === 403) {
                     // We still want to create the embed to give users visual feedback
                     createEmbed(json, element);
-                    return reject(new Error(`“${videoUrl}” is not embeddable.`));
-                } 
+                    reject(new Error(`“${videoUrl}” is not embeddable.`));
+                    return;
+                }
 
-               resolve(json);
+                resolve(json);
             }
             catch (error) {
                 reject(error);
@@ -103,31 +130,6 @@ export function getOEmbedData(videoUrl, params = {}, element) {
 
         xhr.send();
     });
-}
-
-/**
- * Create an embed from oEmbed data inside an element.
- *
- * @param {object} data The oEmbed data.
- * @param {HTMLElement} element The element to put the iframe in.
- * @return {HTMLIFrameElement} The iframe embed.
- */
-export function createEmbed({ html }, element) {
-    if (!element) {
-        throw new TypeError('An element must be provided');
-    }
-
-    if (element.getAttribute('data-vimeo-initialized') !== null) {
-        return element.querySelector('iframe');
-    }
-
-    const div = document.createElement('div');
-    div.innerHTML = html;
-
-    element.appendChild(div.firstChild);
-    element.setAttribute('data-vimeo-initialized', 'true');
-
-    return element.querySelector('iframe');
 }
 
 /**
