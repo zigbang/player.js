@@ -75,7 +75,7 @@ element and the video id or vimeo.com url (and optional
 </script>
 ```
 
-Similarly, if you’re trying to instantiate a private video,
+Similarly, if you’re trying to instantiate a private or unlisted video,
 you MUST pass the full vimeo url which includes the private video hash:
 
 ```html
