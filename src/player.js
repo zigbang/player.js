@@ -40,8 +40,6 @@ class Player {
             throw new TypeError('You must pass either a valid element or a valid id.');
         }
 
-        const win = element.ownerDocument.defaultView;
-
         // Already initialized an embed in this div, so grab the iframe
         if (element.nodeName !== 'IFRAME') {
             const iframe = element.querySelector('iframe');
@@ -61,11 +59,12 @@ class Player {
             return playerMap.get(element);
         }
 
+        this._window = element.ownerDocument.defaultView;
         this.element = element;
         this.origin = '*';
 
         const readyPromise = new Promise((resolve, reject) => {
-            const onMessage = (event) => {
+            this._onMessage = (event) => {
                 if (!isVimeoUrl(event.origin) || this.element.contentWindow !== event.source) {
                     return;
                 }
@@ -97,7 +96,7 @@ class Player {
                 processData(this, data);
             };
 
-            win.addEventListener('message', onMessage);
+            this._window.addEventListener('message', this._onMessage);
 
             if (this.element.nodeName !== 'IFRAME') {
                 const params = getOEmbedParameters(element, options);
@@ -465,13 +464,18 @@ class Player {
         return new Promise((resolve) => {
             readyMap.delete(this);
             playerMap.delete(this.element);
+
             if (this._originalElement) {
                 playerMap.delete(this._originalElement);
                 this._originalElement.removeAttribute('data-vimeo-initialized');
             }
+
             if (this.element && this.element.nodeName === 'IFRAME' && this.element.parentNode) {
                 this.element.parentNode.removeChild(this.element);
             }
+
+            this._window.removeEventListener('message', this._onMessage);
+
             resolve();
         });
     }
