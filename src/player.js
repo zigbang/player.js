@@ -97,12 +97,7 @@ class Player {
                 processData(this, data);
             };
 
-            if (win.addEventListener) {
-                win.addEventListener('message', onMessage, false);
-            }
-            else if (win.attachEvent) {
-                win.attachEvent('onmessage', onMessage);
-            }
+            win.addEventListener('message', onMessage);
 
             if (this.element.nodeName !== 'IFRAME') {
                 const params = getOEmbedParameters(element, options);

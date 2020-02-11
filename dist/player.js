@@ -908,11 +908,7 @@
       }
     };
 
-    if (window.addEventListener) {
-      window.addEventListener('message', onMessage, false);
-    } else if (window.attachEvent) {
-      window.attachEvent('onmessage', onMessage);
-    }
+    window.addEventListener('message', onMessage);
   }
 
   /**
@@ -1113,11 +1109,7 @@
           processData(_this, data);
         };
 
-        if (win.addEventListener) {
-          win.addEventListener('message', onMessage, false);
-        } else if (win.attachEvent) {
-          win.attachEvent('onmessage', onMessage);
-        }
+        win.addEventListener('message', onMessage);
 
         if (_this.element.nodeName !== 'IFRAME') {
           var params = getOEmbedParameters(element, options);
