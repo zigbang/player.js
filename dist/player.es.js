@@ -1,4 +1,4 @@
-/*! @vimeo/player v2.10.0 | (c) 2019 Vimeo | MIT License | https://github.com/vimeo/player.js */
+/*! @vimeo/player v2.10.0 | (c) 2020 Vimeo | MIT License | https://github.com/vimeo/player.js */
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -120,16 +120,16 @@ if (!isNode && (!arrayIndexOfSupport || !postMessageSupport)) {
   throw new Error('Sorry, the Vimeo Player API is not available in this browser.');
 }
 
-var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
 /*!
- * weakmap-polyfill v2.0.0 - ECMAScript6 WeakMap polyfill
+ * weakmap-polyfill v2.0.1 - ECMAScript6 WeakMap polyfill
  * https://github.com/polygonplanet/weakmap-polyfill
- * Copyright (c) 2015-2016 polygon planet <polygon.planet.aqua@gmail.com>
+ * Copyright (c) 2015-2020 Polygon Planet <polygon.planet.aqua@gmail.com>
  * @license MIT
  */
 (function (self) {
@@ -267,7 +267,7 @@ var npo_src = createCommonjsModule(function (module) {
   // special form of UMD for polyfilling across evironments
   context[name] = context[name] || definition();
 
-  if (module.exports) {
+  if ( module.exports) {
     module.exports = context[name];
   }
 })("Promise", typeof commonjsGlobal != "undefined" ? commonjsGlobal : commonjsGlobal, function DEF() {
