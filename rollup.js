@@ -42,9 +42,7 @@ async function generateBundle() {
             plugins: [
                 babel(),
                 commonjs(),
-                nodeResolve({
-                    jsnext: true
-                })
+                nodeResolve()
             ]
         });
 
