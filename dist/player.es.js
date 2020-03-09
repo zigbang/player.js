@@ -902,11 +902,7 @@ function resizeEmbeds() {
     }
   };
 
-  if (window.addEventListener) {
-    window.addEventListener('message', onMessage, false);
-  } else if (window.attachEvent) {
-    window.attachEvent('onmessage', onMessage);
-  }
+  window.addEventListener('message', onMessage);
 }
 
 /**
@@ -1049,9 +1045,8 @@ function () {
 
     if (!isDomElement(element)) {
       throw new TypeError('You must pass either a valid element or a valid id.');
-    }
+    } // Already initialized an embed in this div, so grab the iframe
 
-    var win = element.ownerDocument.defaultView; // Already initialized an embed in this div, so grab the iframe
 
     if (element.nodeName !== 'IFRAME') {
       var iframe = element.querySelector('iframe');
@@ -1071,10 +1066,11 @@ function () {
       return playerMap.get(element);
     }
 
+    this._window = element.ownerDocument.defaultView;
     this.element = element;
     this.origin = '*';
     var readyPromise = new npo_src(function (resolve, reject) {
-      var onMessage = function onMessage(event) {
+      _this._onMessage = function (event) {
         if (!isVimeoUrl(event.origin) || _this.element.contentWindow !== event.source) {
           return;
         }
@@ -1107,11 +1103,7 @@ function () {
         processData(_this, data);
       };
 
-      if (win.addEventListener) {
-        win.addEventListener('message', onMessage, false);
-      } else if (win.attachEvent) {
-        win.attachEvent('onmessage', onMessage);
-      }
+      _this._window.addEventListener('message', _this._onMessage);
 
       if (_this.element.nodeName !== 'IFRAME') {
         var params = getOEmbedParameters(element, options);
@@ -1532,6 +1524,8 @@ function () {
         if (_this5.element && _this5.element.nodeName === 'IFRAME' && _this5.element.parentNode) {
           _this5.element.parentNode.removeChild(_this5.element);
         }
+
+        _this5._window.removeEventListener('message', _this5._onMessage);
 
         resolve();
       });
