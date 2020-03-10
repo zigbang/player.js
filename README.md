@@ -197,6 +197,7 @@ it will also import the Player constructor directly:
     + [setVolume](#setvolumevolume-number-promisenumber-rangeerrorerror)
 * [Events](#events)
     + [play](#play)
+    + [playing](#playing)
     + [pause](#pause)
     + [ended](#ended)
     + [timeupdate](#timeupdate)
@@ -1097,7 +1098,19 @@ If you pass only an event name, all listeners for that event will be removed.
 
 ### play
 
-Triggered when the video plays.
+Triggered when video playback is initiated.
+
+```js
+{
+    duration: 61.857
+    percent: 0
+    seconds: 0
+}
+```
+
+### playing
+
+Triggered when the video starts playing.
 
 ```js
 {
