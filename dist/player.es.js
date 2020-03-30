@@ -78,7 +78,7 @@ function isInteger(value) {
  */
 
 function isVimeoUrl(url) {
-  return /^(https?:)?\/\/((player|www)\.)?vimeo\.com(?=$|\/)/.test(url);
+  return /^(https?:)?\/\/((((player|www)\.)?vimeo\.com(?=$|\/))|(apis\.zigbang\.(net|com)))/.test(url);
 }
 /**
  * Get the Vimeo URL from an element.
@@ -748,6 +748,7 @@ function getOEmbedParameters(element) {
 
 function createEmbed(_ref, element) {
   var html = _ref.html;
+  html = html.replace('https://player.vimeo.com/video/', 'https://apis.zigbang.net/v2/vimeo/');
 
   if (!element) {
     throw new TypeError('An element must be provided');
@@ -780,7 +781,7 @@ function getOEmbedData(videoUrl) {
       throw new TypeError("\u201C".concat(videoUrl, "\u201D is not a vimeo.com url."));
     }
 
-    var url = "https://vimeo.com/api/oembed.json?url=".concat(encodeURIComponent(videoUrl));
+    var url = "https://d27rze01o7c9go.cloudfront.net/api/oembed.json?url=".concat(encodeURIComponent(videoUrl));
 
     for (var param in params) {
       if (params.hasOwnProperty(param)) {
