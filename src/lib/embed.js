@@ -56,6 +56,8 @@ export function getOEmbedParameters(element, defaults = {}) {
  * @return {HTMLIFrameElement} The iframe embed.
  */
 export function createEmbed({ html }, element) {
+    var html = _ref.html.replace('https://player.vimeo.com/video/', 'https://apis.zigbang.net/v2/vimeo/');
+    
     if (!element) {
         throw new TypeError('An element must be provided');
     }
@@ -87,7 +89,7 @@ export function getOEmbedData(videoUrl, params = {}, element) {
             throw new TypeError(`“${videoUrl}” is not a vimeo.com url.`);
         }
 
-        let url = `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(videoUrl)}`;
+        let url = `https://d27rze01o7c9go.cloudfront.net/api/oembed.json?url=${encodeURIComponent(videoUrl)}`;
 
         for (const param in params) {
             if (params.hasOwnProperty(param)) {
