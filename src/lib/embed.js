@@ -56,8 +56,8 @@ export function getOEmbedParameters(element, defaults = {}) {
  * @return {HTMLIFrameElement} The iframe embed.
  */
 export function createEmbed({ html }, element) {
-    var html = _ref.html.replace('https://player.vimeo.com/video/', 'https://apis.zigbang.net/v2/vimeo/');
-    
+    html = html.replace('https://player.vimeo.com/video/', 'https://apis.zigbang.net/v2/vimeo/');
+
     if (!element) {
         throw new TypeError('An element must be provided');
     }
