@@ -1,5 +1,5 @@
 {
-  "name": "@vimeo/player",
+  "name": "@zigbang/player",
   "version": "2.10.1",
   "description": "Interact with and control an embedded Vimeo Player.",
   "license": "MIT",
