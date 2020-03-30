@@ -50,7 +50,7 @@ async function generateBundle() {
 
         let { output } = await bundle.generate({
             format: 'umd',
-            name: 'Vimeo.Player',
+            name: 'Zigbang.Player',
             sourcemap: true,
             sourcemapFile: 'dist/player.js.map',
             banner
