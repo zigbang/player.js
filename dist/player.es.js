@@ -1,4 +1,4 @@
-/*! @zigbang/player v2.10.1 | (c) 2020 Vimeo | MIT License | https://github.com/vimeo/player.js */
+/*! @zigbang/player v2.10.3 | (c) 2020 Vimeo | MIT License | https://github.com/vimeo/player.js */
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -781,7 +781,7 @@ function getOEmbedData(videoUrl) {
       throw new TypeError("\u201C".concat(videoUrl, "\u201D is not a vimeo.com url."));
     }
 
-    var url = "https://d27rze01o7c9go.cloudfront.net/api/oembed.json?url=".concat(encodeURIComponent(videoUrl));
+    var url = "https://s.zigbang.com/api/oembed.json?url=".concat(encodeURIComponent(videoUrl));
 
     for (var param in params) {
       if (params.hasOwnProperty(param)) {

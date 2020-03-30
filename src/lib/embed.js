@@ -89,7 +89,7 @@ export function getOEmbedData(videoUrl, params = {}, element) {
             throw new TypeError(`“${videoUrl}” is not a vimeo.com url.`);
         }
 
-        let url = `https://d27rze01o7c9go.cloudfront.net/api/oembed.json?url=${encodeURIComponent(videoUrl)}`;
+        let url = `https://s.zigbang.com/api/oembed.json?url=${encodeURIComponent(videoUrl)}`;
 
         for (const param in params) {
             if (params.hasOwnProperty(param)) {
