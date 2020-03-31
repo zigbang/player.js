@@ -1,6 +1,6 @@
 {
   "name": "@zigbang/vimeo-player",
-  "version": "2.10.1",
+  "version": "2.10.3",
   "description": "Interact with and control an embedded Vimeo Player.",
   "license": "MIT",
   "author": "Vimeo <https://vimeo.com>",
@@ -28,7 +28,8 @@
   },
   "files": [
     "src",
-    "dist"
+    "dist",
+    "types"
   ],
   "repository": "vimeo/player.js",
   "bugs": "https://github.com/vimeo/player.js/issues",
@@ -129,5 +130,6 @@
     "last 2 versions",
     "Firefox ESR",
     "not ie < 11"
-  ]
+  ],
+  "types": "types/index.d.ts"
 }

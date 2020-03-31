@@ -1,4 +1,4 @@
-/*! @zigbang/vimeo-player v2.10.1 | (c) 2020 Vimeo | MIT License | https://github.com/vimeo/player.js */
+/*! @zigbang/vimeo-player v2.10.2 | (c) 2020 Vimeo | MIT License | https://github.com/vimeo/player.js */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :

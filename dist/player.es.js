@@ -1,4 +1,4 @@
-/*! @zigbang/vimeo-player v2.10.1 | (c) 2020 Vimeo | MIT License | https://github.com/vimeo/player.js */
+/*! @zigbang/vimeo-player v2.10.2 | (c) 2020 Vimeo | MIT License | https://github.com/vimeo/player.js */
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
