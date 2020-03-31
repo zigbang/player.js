@@ -58,7 +58,7 @@ export function isInteger(value) {
  * @return {boolean}
  */
 export function isVimeoUrl(url) {
-    return /^(https?:)?\/\/((((player|www)\.)?vimeo\.com(?=$|\/))|(apis\.zigbang\.(net|com)))/.test(url);
+    return /^(https?:)?\/\/((((player|www)\.)?vimeo\.com(?=$|\/))|(apis(-preview)?\.zigbang\.(net|com)))/.test(url);
 }
 
 /**

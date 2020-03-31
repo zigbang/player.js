@@ -1,4 +1,4 @@
-/*! @zigbang/player v2.10.3 | (c) 2020 Vimeo | MIT License | https://github.com/vimeo/player.js */
+/*! @zigbang/player v2.10.4 | (c) 2020 Vimeo | MIT License | https://github.com/vimeo/player.js */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -84,7 +84,7 @@
    */
 
   function isVimeoUrl(url) {
-    return /^(https?:)?\/\/((((player|www)\.)?vimeo\.com(?=$|\/))|(apis\.zigbang\.(net|com)))/.test(url);
+    return /^(https?:)?\/\/((((player|www)\.)?vimeo\.com(?=$|\/))|(apis(-preview)?\.zigbang\.(net|com)))/.test(url);
   }
   /**
    * Get the Vimeo URL from an element.
@@ -754,7 +754,7 @@
 
   function createEmbed(_ref, element) {
     var html = _ref.html;
-    html = html.replace('https://player.vimeo.com/video/', 'https://apis.zigbang.net/v2/vimeo/');
+    html = html.replace('https://player.vimeo.com/video/', 'https://apis.zigbang.com/v2/vimeo/');
 
     if (!element) {
       throw new TypeError('An element must be provided');
